@@ -1,6 +1,4 @@
-package com.fmtech.fmimageloader.cache;
-
-import android.graphics.Bitmap;
+package com.fmtech.fmimageloader.policy;
 
 import com.fmtech.fmimageloader.request.BitmapRequest;
 
@@ -15,11 +13,9 @@ import com.fmtech.fmimageloader.request.BitmapRequest;
  * ==================================================================
  */
 
-public interface IBitmapCache {
-    void put(BitmapRequest bitmapRequest, Bitmap bitmap);
-
-    Bitmap get(BitmapRequest bitmapRequest);
-
-    void remove(BitmapRequest bitmapRequest);
-
+public class SerialLoadPolicy implements ILoadPolicy {
+    @Override
+    public int compareTo(BitmapRequest request1, BitmapRequest request2) {
+        return request1.getSerialNo() - request2.getSerialNo();
+    }
 }

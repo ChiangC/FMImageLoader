@@ -1,7 +1,9 @@
 package com.fmtech.fmimageloader.config;
 
+import android.media.Image;
+
 import com.fmtech.fmimageloader.cache.IBitmapCache;
-import com.fmtech.fmimageloader.policy.ILoaderPolicy;
+import com.fmtech.fmimageloader.policy.ILoadPolicy;
 
 /**
  * ==================================================================
@@ -16,9 +18,68 @@ import com.fmtech.fmimageloader.policy.ILoaderPolicy;
  */
 
 public class ImageLoaderConfig {
-    private IBitmapCache bitmapCache;
-    private ILoaderPolicy loaderPolicy;
+    private IBitmapCache mBitmapCache;
+    private ILoadPolicy mLoadPolicy;
+    private int mThreadCount = Runtime.getRuntime().availableProcessors();
+    private DisplayConfig mDisplayConfig;
 
-    private int threadCount = Runtime.getRuntime().availableProcessors();
-    
+    private ImageLoaderConfig(){
+
+    }
+
+    public static class Builder{
+        private ImageLoaderConfig config;
+
+        public Builder(){
+            config = new ImageLoaderConfig();
+        }
+
+        public Builder setCachePolicy(IBitmapCache bitmapCache){
+            config.mBitmapCache = bitmapCache;
+            return this;
+        }
+
+        public Builder setLoadPolicy(ILoadPolicy loadPolicy){
+            config.mLoadPolicy = loadPolicy;
+            return this;
+        }
+
+        public Builder setThreadCount(int count){
+            config.mThreadCount = count;
+            return this;
+        }
+
+        public Builder setLoadingImage(int resId){
+            config.mDisplayConfig.loadingImage = resId;
+            return this;
+        }
+
+        public Builder setLoadFailedImage(int resId){
+            config.mDisplayConfig.loadFailedImage = resId;
+            return this;
+        }
+
+        public ImageLoaderConfig build(){
+            return config;
+        }
+
+    }
+
+    public IBitmapCache getBitmapCache() {
+        return mBitmapCache;
+    }
+
+    public ILoadPolicy getLoadPolicy() {
+        return mLoadPolicy;
+    }
+
+    public int getThreadCount() {
+        return mThreadCount;
+    }
+
+    public DisplayConfig getDisplayConfig() {
+        return mDisplayConfig;
+    }
+
+
 }

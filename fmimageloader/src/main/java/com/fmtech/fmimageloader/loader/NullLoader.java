@@ -1,4 +1,8 @@
-package com.fmtech.fmimageloader.policy;
+package com.fmtech.fmimageloader.loader;
+
+import android.graphics.Bitmap;
+
+import com.fmtech.fmimageloader.request.BitmapRequest;
 
 /**
  * ==================================================================
@@ -11,5 +15,11 @@ package com.fmtech.fmimageloader.policy;
  * ==================================================================
  */
 
-public class SerialPolicy implements ILoaderPolicy {
+public class NullLoader extends AbstractLoader {
+
+    @Override
+    protected Bitmap onLoad(BitmapRequest request) {
+        return null;
+    }
+
 }

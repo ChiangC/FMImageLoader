@@ -1,5 +1,7 @@
 package com.fmtech.fmimageloader.loader;
 
+import com.fmtech.fmimageloader.request.BitmapRequest;
+
 /**
  * ==================================================================
  * Copyright (C) 2018 FMTech All Rights Reserved.
@@ -13,4 +15,5 @@ package com.fmtech.fmimageloader.loader;
  */
 
 public interface ILoader {
+    void loadImage(BitmapRequest bitmapRequest);
 }

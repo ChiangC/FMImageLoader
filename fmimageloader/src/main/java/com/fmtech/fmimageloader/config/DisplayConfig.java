@@ -1,4 +1,4 @@
-package com.fmtech.fmimageloader.policy;
+package com.fmtech.fmimageloader.config;
 
 /**
  * ==================================================================
@@ -11,5 +11,8 @@ package com.fmtech.fmimageloader.policy;
  * ==================================================================
  */
 
-public class ReversePolicy implements ILoaderPolicy {
+public class DisplayConfig {
+    public int loadingImage = -1;
+
+    public int loadFailedImage = -1;
 }

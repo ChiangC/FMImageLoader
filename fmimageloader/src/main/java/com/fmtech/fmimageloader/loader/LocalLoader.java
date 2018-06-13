@@ -1,5 +1,9 @@
 package com.fmtech.fmimageloader.loader;
 
+import android.graphics.Bitmap;
+
+import com.fmtech.fmimageloader.request.BitmapRequest;
+
 /**
  * ==================================================================
  * Copyright (C) 2018 FMTech All Rights Reserved.
@@ -13,4 +17,9 @@ package com.fmtech.fmimageloader.loader;
  */
 
 public class LocalLoader extends AbstractLoader {
+    @Override
+    protected Bitmap onLoad(BitmapRequest request) {
+        return null;
+    }
+
 }
