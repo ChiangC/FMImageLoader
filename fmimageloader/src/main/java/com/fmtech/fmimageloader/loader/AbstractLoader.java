@@ -39,10 +39,9 @@ public abstract class AbstractLoader implements ILoader{
 
             cacheBitmap(bitmapRequest, bitmap);
 
-        }else{
-
         }
 
+        deliveryToUIThread(bitmapRequest,bitmap);
     }
 
     private void showLoadingImage(BitmapRequest request){
@@ -68,6 +67,35 @@ public abstract class AbstractLoader implements ILoader{
             synchronized (AbstractLoader.class){
                 mBitmapCache.put(bitmapRequest, bitmap);
             }
+        }
+    }
+
+    protected void deliveryToUIThread(final BitmapRequest request, final Bitmap bitmap){
+        ImageView imageView = request.getImageView();
+        if(null != imageView){
+            imageView.post(new Runnable() {
+                @Override
+                public void run() {
+                    updateImageView(request, bitmap);
+                }
+            });
+        }
+    }
+
+    private void updateImageView(BitmapRequest request, Bitmap bitmap){
+       ImageView imageView = request.getImageView();
+        if(null != imageView && null != bitmap &&
+                imageView.getTag().equals(request.getImageUri())){
+            imageView.setImageBitmap(bitmap);
+        }
+
+        DisplayConfig displayConfig = request.getDisplayConfig();
+        if(null == bitmap && null != displayConfig && displayConfig.loadFailedImage != -1){
+            imageView.setImageResource(displayConfig.loadFailedImage);
+        }
+
+        if(null != request.mImageListener){
+            request.mImageListener.onComplete(imageView, bitmap, request.getImageUri());
         }
     }
 

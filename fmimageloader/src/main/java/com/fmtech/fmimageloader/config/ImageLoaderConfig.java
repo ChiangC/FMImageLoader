@@ -2,8 +2,11 @@ package com.fmtech.fmimageloader.config;
 
 import android.media.Image;
 
+import com.fmtech.fmimageloader.cache.DoubleCache;
 import com.fmtech.fmimageloader.cache.IBitmapCache;
+import com.fmtech.fmimageloader.cache.MemoryCache;
 import com.fmtech.fmimageloader.policy.ILoadPolicy;
+import com.fmtech.fmimageloader.policy.ReverseLoadPolicy;
 
 /**
  * ==================================================================
@@ -18,10 +21,10 @@ import com.fmtech.fmimageloader.policy.ILoadPolicy;
  */
 
 public class ImageLoaderConfig {
-    private IBitmapCache mBitmapCache;
-    private ILoadPolicy mLoadPolicy;
+    private IBitmapCache mBitmapCache = new MemoryCache();
+    private ILoadPolicy mLoadPolicy = new ReverseLoadPolicy();
     private int mThreadCount = Runtime.getRuntime().availableProcessors();
-    private DisplayConfig mDisplayConfig;
+    private DisplayConfig mDisplayConfig = new DisplayConfig();
 
     private ImageLoaderConfig(){
 

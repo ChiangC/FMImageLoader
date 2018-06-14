@@ -1,13 +1,15 @@
 package com.fmtech.fmimageloader.request;
 
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.fmtech.fmimageloader.config.DisplayConfig;
 import com.fmtech.fmimageloader.loader.SimpleImageLoader;
 import com.fmtech.fmimageloader.policy.ILoadPolicy;
+import com.fmtech.fmimageloader.utils.MD5Utils;
 
 import java.lang.ref.SoftReference;
-import java.util.Comparator;
+import java.lang.Comparable;
 import java.util.Objects;
 
 /**
@@ -21,11 +23,11 @@ import java.util.Objects;
  * ==================================================================
  */
 
-public class BitmapRequest implements Comparator<BitmapRequest>{
+public class BitmapRequest implements Comparable<BitmapRequest>{
     private SoftReference<ImageView> mTarget;
     private String mImageUri;
     private String mImageUriMD5;
-    private SimpleImageLoader.ImageListener mImageListener;
+    public SimpleImageLoader.ImageListener mImageListener;
     private DisplayConfig mDisplayConfig;
 
     private ILoadPolicy mLoadPolicy = SimpleImageLoader.getInstance()
@@ -37,6 +39,7 @@ public class BitmapRequest implements Comparator<BitmapRequest>{
         mTarget = new SoftReference<>(imageView);
         imageView.setTag(imageUri);
         this.mImageUri = imageUri;
+        mImageUriMD5 = MD5Utils.toMD5(imageUri);
         this.mImageListener = imageListener;
         if(null != displayConfig){
             mDisplayConfig = displayConfig;
@@ -44,8 +47,8 @@ public class BitmapRequest implements Comparator<BitmapRequest>{
     }
 
     @Override
-    public int compare(BitmapRequest o1, BitmapRequest o2) {
-        return mLoadPolicy.compareTo(o1, o2);
+    public int compareTo(@NonNull BitmapRequest o) {
+        return mLoadPolicy.compareTo(o, this);
     }
 
     public int getSerialNo() {
@@ -92,4 +95,17 @@ public class BitmapRequest implements Comparator<BitmapRequest>{
     public String getImageUri(){
         return mImageUri;
     }
+
+    public String getImageUriMD5() {
+        return mImageUriMD5;
+    }
+
+    public SimpleImageLoader.ImageListener getImageListener() {
+        return mImageListener;
+    }
+
+    public DisplayConfig getDisplayConfig() {
+        return mDisplayConfig;
+    }
+
 }

@@ -62,7 +62,7 @@ public class ImageViewHelper {
 			if(height <= 0){
 				height = getImageViewFieldValue(imageView,"mMaxHeight");
 			}
-			
+			return height;
 		}
 		
 		return DEFAULT_HEIGHT;
