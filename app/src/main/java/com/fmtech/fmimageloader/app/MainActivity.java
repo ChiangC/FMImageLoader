@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
             init();
         }
-
     }
 
     class MyAdapter extends BaseAdapter {
