@@ -29,7 +29,7 @@ import java.io.OutputStream;
 public class DiskCache implements IBitmapCache {
 
     private static DiskCache mDiskCache;
-    private String mCacheDir = "image";
+    private String mCacheDir = "fm_image_loader";
     private static final int MB = 1024*1024;
     private DiskLruCache mDiskLruCache;
 

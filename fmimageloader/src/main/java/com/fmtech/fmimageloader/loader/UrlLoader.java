@@ -85,7 +85,7 @@ public class UrlLoader extends AbstractLoader {
     }
 
     private File getCacheFile(String unipue){
-        File file = new File(Environment.getExternalStorageDirectory(), unipue);
+        File file = new File(Environment.getExternalStorageDirectory(), "fm_image_loader");
         if(!file.exists()){
             file.mkdir();
         }
